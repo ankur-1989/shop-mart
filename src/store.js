@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { storeProducts, detailProduct } from "./data";
-import { prettyDOM } from "@testing-library/react";
+
 const DataContext = React.createContext();
 
 export default class DataProvider extends Component {
