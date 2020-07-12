@@ -18,6 +18,7 @@ export default class Navbar extends Component {
             </Link>
           </li>
         </ul>
+
         <Link to="/cart" className="ml-auto">
           <ButtonContainer>
             <span className="mr-2">
@@ -26,6 +27,18 @@ export default class Navbar extends Component {
             My Cart
           </ButtonContainer>
         </Link>
+        <ul className="navbar-nav align-items-center">
+          <li className="nav-item ml-2">
+            <Link to="/register" className="nav-link">
+              Register
+            </Link>
+          </li>
+          <li className="nav-item ml-2">
+            <Link to="/login" className="nav-link">
+              Login
+            </Link>
+          </li>
+        </ul>
       </NavWrapper>
     );
   }

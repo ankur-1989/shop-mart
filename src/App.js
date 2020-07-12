@@ -8,7 +8,8 @@ import ProductList from "./components/ProductList";
 import ProductDetails from "./components/ProductDetails";
 import Modal from "./components/Modal";
 import Cart from "./components/Cart";
-
+import Register from "./components/auth/Register";
+import Login from "./components/auth/Login";
 import { library } from "@fortawesome/fontawesome-svg-core";
 
 import { faCartPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
@@ -22,6 +23,8 @@ function App() {
         <Route exact path="/" component={ProductList}></Route>
         <Route path="/cart" component={Cart}></Route>
         <Route path="/details" component={ProductDetails}></Route>
+        <Route path="/register" component={Register}></Route>
+        <Route path="/login" component={Login}></Route>
       </Switch>
       <Modal />
     </React.Fragment>
