@@ -1,19 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, useContext } from "react"
+import { withRouter, Redirect } from "react-router"
+import app from "../../base"
+import { AuthContext } from "../../Auth"
 
-const Login = () => {
+const Login = ({ history }) => {
   const [user, setUser] = useState({
     email: "",
     password: "",
-  });
+  })
 
-  const { email, password } = user;
+  const { email, password } = user
 
-  const onChange = (e) => setUser({ ...user, [e.target.name]: e.target.value });
+  const onChange = (e) => setUser({ ...user, [e.target.name]: e.target.value })
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    console.log("Login submit");
-  };
+  const onSubmit = useCallback(
+    async (event) => {
+      event.preventDefault()
+      const { email, password } = event.target.elements
+      try {
+        await app.auth().signInWithEmailAndPassword(email.value, password.value)
+        history.push("/")
+      } catch (error) {
+        alert(error)
+      }
+    },
+    [history]
+  )
+
+  const { currentUser } = useContext(AuthContext)
+
+  if (currentUser) {
+    return <Redirect to="/" />
+  }
 
   return (
     <div className="form-container">
@@ -39,8 +57,11 @@ const Login = () => {
           className="btn btn-primary btn-block"
         />
       </form>
+      <p className="registerContainer">
+        Not Registered Yet? <strong>Register</strong>
+      </p>
     </div>
-  );
-};
+  )
+}
 
-export default Login;
+export default withRouter(Login)

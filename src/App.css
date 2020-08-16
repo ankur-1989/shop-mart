@@ -125,3 +125,10 @@ h2,
 h3 {
   text-align: center;
 }
+
+.registerContainer {
+  text-align: center;
+  margin: 2rem auto;
+  text-decoration: underline;
+  cursor: pointer;
+}

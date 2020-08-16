@@ -1,21 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react"
+import { withRouter } from "react-router"
+import app from "../../base"
 
-const Register = () => {
+const Register = ({ history }) => {
   const [user, setUser] = useState({
     name: "",
     email: "",
     password: "",
     confirmPassword: "",
-  });
+  })
 
-  const { name, email, password, confirmPassword } = user;
+  const { name, email, password, confirmPassword } = user
 
-  const onChange = (e) => setUser({ ...user, [e.target.name]: e.target.value });
+  const onChange = (e) => setUser({ ...user, [e.target.name]: e.target.value })
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    console.log("Register submit");
-  };
+  const onSubmit = useCallback(
+    async (event) => {
+      event.preventDefault()
+      const { email, password } = event.target.elements
+      try {
+        await app
+          .auth()
+          .createUserWithEmailAndPassword(email.value, password.value)
+        history.push("/")
+      } catch (error) {
+        alert(error)
+      }
+    },
+    [history]
+  )
 
   return (
     <div className="form-container">
@@ -54,7 +67,7 @@ const Register = () => {
         />
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default Register;
+export default withRouter(Register)
