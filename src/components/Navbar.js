@@ -43,13 +43,6 @@ export default function Navbar() {
         </Link>
       )}
       <ul className="navbar-nav align-items-center">
-        {!currentUser && (
-          <li className="nav-item ml-2">
-            <Link to="/register" className="nav-link">
-              Register
-            </Link>
-          </li>
-        )}
         <li className="nav-item ml-2">
           {!currentUser ? (
             <Link to="/login" className="nav-link">

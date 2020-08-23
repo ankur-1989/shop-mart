@@ -57,7 +57,10 @@ const Login = ({ history }) => {
           className="btn btn-primary btn-block"
         />
       </form>
-      <p className="registerContainer">
+      <p
+        className="registerContainer"
+        onClick={() => history.push("/register")}
+      >
         Not Registered Yet? <strong>Register</strong>
       </p>
     </div>
