@@ -17,6 +17,7 @@ import {
   faTrash,
   faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons"
+import PaidCart from "./components/PaidCart"
 library.add(faCartPlus, faTrash, faSignOutAlt)
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
         <PrivateRoute path="/details" component={ProductDetails}></PrivateRoute>
         <Route path="/register" component={Register}></Route>
         <Route path="/login" component={Login}></Route>
+        <Route path="/paidCart" component={PaidCart}></Route>
       </Switch>
       <Modal />
     </React.Fragment>
