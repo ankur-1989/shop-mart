@@ -1,18 +1,13 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import "./index.css"
-
 import App from "./App"
-import DataProvider from "./store"
-import { BrowserRouter as Router } from "react-router-dom"
 import { AuthProvider } from "./Auth"
+import DataProvider from "./store"
 
 ReactDOM.render(
   <AuthProvider>
     <DataProvider>
-      <Router>
-        <App />
-      </Router>
+      <App />
     </DataProvider>
   </AuthProvider>,
   document.getElementById("root")

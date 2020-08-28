@@ -1,39 +1,38 @@
 import React from "react"
-
-import "./App.css"
-import "bootstrap/dist/css/bootstrap.min.css"
-import { Switch, Route } from "react-router-dom"
 import Navbar from "./components/Navbar"
-import ProductList from "./components/ProductList"
-import ProductDetails from "./components/ProductDetails"
 import Modal from "./components/Modal"
+import "bootstrap/dist/css/bootstrap.min.css"
+import "./App.css"
+import Home from "./components/pages/Home"
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
+
+import ContactUs from "./components/pages/ContactUs"
+import ProductList from "./components/pages/ProductList"
+import ProductDetails from "./components/pages/ProductDetails"
 import Cart from "./components/Cart"
-import Register from "./components/auth/Register"
-import Login from "./components/auth/Login"
-import { library } from "@fortawesome/fontawesome-svg-core"
 import PrivateRoute from "./PrivateRoute"
-import {
-  faCartPlus,
-  faTrash,
-  faSignOutAlt,
-} from "@fortawesome/free-solid-svg-icons"
 import PaidCart from "./components/PaidCart"
-library.add(faCartPlus, faTrash, faSignOutAlt)
+import SignUp from "./components/pages/SignUp"
+import Login from "./components/pages/Login"
 
 function App() {
   return (
-    <React.Fragment>
-      <Navbar></Navbar>
+    <Router>
+      <Navbar />
       <Switch>
-        <Route exact path="/" component={ProductList} />
+        <Route exact path="/" component={Home} />
+        <Route path="/products" component={ProductList} />
         <PrivateRoute path="/cart" component={Cart}></PrivateRoute>
         <PrivateRoute path="/details" component={ProductDetails}></PrivateRoute>
-        <Route path="/register" component={Register}></Route>
+        <Route path="/sign-up" component={SignUp}></Route>
         <Route path="/login" component={Login}></Route>
+        <Route path="/contact-us" component={ContactUs}></Route>
+        <Route path="/profile" component={ContactUs}></Route>
+        <Route path="/orders" component={ContactUs}></Route>
         <Route path="/paidCart" component={PaidCart}></Route>
       </Switch>
       <Modal />
-    </React.Fragment>
+    </Router>
   )
 }
 

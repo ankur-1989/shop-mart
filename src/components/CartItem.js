@@ -1,8 +1,8 @@
-import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from "react"
+
 export default function CartItem({ item, value }) {
-  const { id, title, img, price, total, count } = item;
-  const { increment, decrement, removeItem } = value;
+  const { id, title, img, price, total, count } = item
+  const { increment, decrement, removeItem } = value
   return (
     <div className="row my-1 text-capitalize text-center">
       <div className="col-10 mx-auto col-lg-2">
@@ -34,12 +34,12 @@ export default function CartItem({ item, value }) {
       </div>
       <div className="col-10 mx-auto col-lg-2">
         <div className="cart-icon" onClick={() => removeItem(id)}>
-          <FontAwesomeIcon icon="trash" />
+          <i className="fas fa-trash" />
         </div>
       </div>
       <div className="col-10 mx-auto col-lg-2">
         <strong> item total : € {total}</strong>
       </div>
     </div>
-  );
+  )
 }

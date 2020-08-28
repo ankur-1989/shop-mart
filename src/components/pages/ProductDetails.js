@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { DataConsumer } from "../store";
-import { Link } from "react-router-dom";
-import { ButtonContainer } from "./Button";
+import React, { Component } from "react"
+import { DataConsumer } from "../../store"
+import { Link } from "react-router-dom"
+import { ButtonContainer } from "../Button"
 
 export default class ProductDetails extends Component {
   render() {
@@ -16,7 +16,7 @@ export default class ProductDetails extends Component {
             price,
             title,
             inCart,
-          } = value.detailProduct;
+          } = value.detailProduct
           return (
             <div className="container py-5">
               <div className="row">
@@ -46,14 +46,14 @@ export default class ProductDetails extends Component {
                   <p className="text-muted lead">{info}</p>
 
                   <div>
-                    <Link to="/">
+                    <Link to="/products">
                       <ButtonContainer back>back to products</ButtonContainer>
                     </Link>
                     <ButtonContainer
                       disabled={inCart}
                       onClick={() => {
-                        value.addToCart(id);
-                        value.openModal(id);
+                        value.addToCart(id)
+                        value.openModal(id)
                       }}
                     >
                       {inCart ? "inCart" : "add to cart"}
@@ -62,9 +62,9 @@ export default class ProductDetails extends Component {
                 </div>
               </div>
             </div>
-          );
+          )
         }}
       </DataConsumer>
-    );
+    )
   }
 }

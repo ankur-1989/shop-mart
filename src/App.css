@@ -1,3 +1,10 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "PT Sans", sans-serif;
+}
+
 :root {
   --mainBlue: #2a2a72;
   --lightBlue: #009ffd;
@@ -50,8 +57,8 @@ body {
 
 .btn {
   display: inline-block;
-  background: var(--brandColor);
-  color: #333;
+  background: var(--brandBlue);
+  color: #fff;
   padding: 0.4rem 1.3rem;
   font-size: 1rem;
   border: none;
@@ -131,4 +138,40 @@ h3 {
   margin: 2rem auto;
   text-decoration: underline;
   cursor: pointer;
+}
+
+.home {
+  display: flex;
+  height: 90vh;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+}
+
+.home {
+  background-image: url("./assets/img-1.jpg");
+  background-position: center;
+  filter: blur(4px);
+  -webkit-filter: blur(4px);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.homeText {
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/opacity/see-through */
+  color: white;
+  font-weight: bold;
+  border: 3px solid #f1f1f1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 80%;
+  padding: 20px;
+  text-align: center;
+}
+
+.homeHeader {
+  margin: 10px;
 }

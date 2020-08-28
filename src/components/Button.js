@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components"
 
 export const ButtonContainer = styled.button`
   text-transform: capitalize;
@@ -21,4 +21,4 @@ export const ButtonContainer = styled.button`
   &:focus {
     outline: none;
   }
-`;
+`

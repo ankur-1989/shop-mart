@@ -2,7 +2,7 @@ import React, { useState, useCallback } from "react"
 import { withRouter } from "react-router"
 import app from "../../base"
 
-const Register = ({ history }) => {
+const SignUp = ({ history }) => {
   const [user, setUser] = useState({
     name: "",
     email: "",
@@ -70,4 +70,4 @@ const Register = ({ history }) => {
   )
 }
 
-export default withRouter(Register)
+export default withRouter(SignUp)

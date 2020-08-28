@@ -19,7 +19,7 @@ const Login = ({ history }) => {
       const { email, password } = event.target.elements
       try {
         await app.auth().signInWithEmailAndPassword(email.value, password.value)
-        history.push("/")
+        history.push("/products")
       } catch (error) {
         alert(error)
       }
@@ -30,7 +30,7 @@ const Login = ({ history }) => {
   const { currentUser } = useContext(AuthContext)
 
   if (currentUser) {
-    return <Redirect to="/" />
+    return <Redirect to="/products" />
   }
 
   return (
@@ -57,10 +57,7 @@ const Login = ({ history }) => {
           className="btn btn-primary btn-block"
         />
       </form>
-      <p
-        className="registerContainer"
-        onClick={() => history.push("/register")}
-      >
+      <p className="registerContainer" onClick={() => history.push("/sign-up")}>
         Not Registered Yet? <strong>Register</strong>
       </p>
     </div>

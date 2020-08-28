@@ -1,0 +1,39 @@
+.sm-dropdown-menu {
+  background: red;
+  width: 200px;
+  position: absolute;
+  top: 80px;
+  z-index: 2;
+  list-style: none;
+  text-align: start;
+}
+
+.sm-dropdown-menu li {
+  background: var(--brandBlue);
+  cursor: pointer;
+  z-index: 2;
+}
+
+.sm-dropdown-menu li:hover {
+  background: #5cabff;
+}
+
+.sm-dropdown-menu.clicked {
+  display: none;
+}
+
+.sm-dropdown-link {
+  display: block;
+  height: 100%;
+  width: 100%;
+  text-decoration: none;
+  color: #fff;
+  padding: 16px;
+  z-index: 3;
+}
+
+@media screen and (max-width: 960px) {
+  .fa-caret-down {
+    display: none;
+  }
+}

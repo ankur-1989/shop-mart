@@ -1,18 +1,18 @@
-import React, { Component } from "react";
-import styled from "styled-components";
-import { DataConsumer } from "../store";
-import { ButtonContainer } from "./Button";
-import { Link } from "react-router-dom";
+import React, { Component } from "react"
+import styled from "styled-components"
+import { DataConsumer } from "../store"
+import { ButtonContainer } from "./Button"
+import { Link } from "react-router-dom"
 
 export default class Modal extends Component {
   render() {
     return (
       <DataConsumer>
         {(value) => {
-          const { modalOpen, closeModal } = value;
-          const { img, title, price } = value.modalProduct;
+          const { modalOpen, closeModal } = value
+          const { img, title, price } = value.modalProduct
           if (!modalOpen) {
-            return null;
+            return null
           } else {
             return (
               <ModalContainer>
@@ -23,7 +23,7 @@ export default class Modal extends Component {
                       <img src={img} alt="Product" className="img-fluid" />
                       <h5>{title}</h5>
                       <h5 className="text-muted">Price: € {price}</h5>
-                      <Link to="/">
+                      <Link to="/products">
                         <ButtonContainer back onClick={() => closeModal()}>
                           continue shopping
                         </ButtonContainer>
@@ -37,11 +37,11 @@ export default class Modal extends Component {
                   </div>
                 </div>
               </ModalContainer>
-            );
+            )
           }
         }}
       </DataConsumer>
-    );
+    )
   }
 }
 
@@ -59,4 +59,4 @@ const ModalContainer = styled.div`
   #modal {
     background: var(--mainWhite);
   }
-`;
+`

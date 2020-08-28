@@ -1,72 +1,77 @@
-import React, { useContext } from "react"
-import { Link, useHistory } from "react-router-dom"
+import React, { useState, useContext } from "react"
+import { LoginButton } from "./LoginButton"
+import { Link } from "react-router-dom"
+import "./Navbar.css"
 import logo from "../logo.png"
 import { ButtonContainer } from "./Button"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import styled from "styled-components"
+import Dropdown from "./Dropdown"
 import { AuthContext } from "../Auth"
-import app from "../base"
 
-export default function Navbar() {
+function Navbar() {
+  const [click, setClick] = useState(false)
+  const [dropdown, setDropdown] = useState(false)
   const { currentUser } = useContext(AuthContext)
-  const history = useHistory()
-  const handleLogout = async () => {
-    try {
-      console.log("calling logout")
-      await app.auth().signOut()
-      history.push("/login")
-    } catch (error) {
-      alert(error)
+  const handleClick = () => setClick(!click)
+  const closeMobileMenu = () => setClick(false)
+
+  const onMouseEnter = () => {
+    if (window.innerWidth < 960) {
+      setDropdown(false)
+      console.log(currentUser)
+    } else {
+      console.log(currentUser)
+      setDropdown(true)
     }
   }
-  return (
-    <NavWrapper className="navbar navbar-expand-sm navbar-dark px-sm-5">
-      <Link to="/">
-        <img src={logo} alt="logo" className="navbar-brand size" />
-      </Link>
-      <ul className="navbar-nav align-items-center">
-        <li className="nav-item ml-5">
-          <Link to="/" className="nav-link">
-            Products
-          </Link>
-        </li>
-      </ul>
 
-      {currentUser && (
-        <Link to="/cart" className="ml-auto">
-          <ButtonContainer>
-            <span className="mr-2">
-              <FontAwesomeIcon icon="cart-plus" />
-            </span>
-            My Cart
-          </ButtonContainer>
+  const onMouseLeave = () => {
+    if (window.innerWidth < 960) {
+      setDropdown(false)
+    } else {
+      setDropdown(false)
+    }
+  }
+
+  return (
+    <>
+      <nav className="sm-navbar">
+        <Link to="/" className="navbar-logo" onClick={closeMobileMenu}>
+          <img src={logo} alt="logo" className="navbar-brand size" />
+          <span className="brandNameFirst">Shop</span>
+          <span className="brandNameLast">Mart</span>
         </Link>
-      )}
-      <ul className="navbar-nav align-items-center">
-        <li className="nav-item ml-2">
-          {!currentUser ? (
-            <Link to="/login" className="nav-link">
-              Login
-            </Link>
-          ) : (
-            <ButtonContainer onClick={handleLogout}>
-              <span className="mr-2">
-                <FontAwesomeIcon icon="sign-out-alt" />
-              </span>
-              Logout
-            </ButtonContainer>
+
+        <ul className={click ? "sm-nav-menu active" : "sm-nav-menu"}>
+          {currentUser && (
+            <li className="sm-nav-item">
+              <ButtonContainer
+                onMouseEnter={onMouseEnter}
+                onMouseLeave={onMouseLeave}
+                className="sm-nav-links"
+                back
+                onClick={closeMobileMenu}
+              >
+                Services <i className="fas fa-caret-down" />
+              </ButtonContainer>
+              {dropdown && <Dropdown />}
+            </li>
           )}
-        </li>
-      </ul>
-    </NavWrapper>
+        </ul>
+        {!currentUser ? (
+          <LoginButton />
+        ) : (
+          <Link to="/cart" className="ml-auto mr-2">
+            <ButtonContainer>
+              <span className="mr-2">
+                <i className="fas fa-cart-plus" />
+              </span>
+              My Cart
+            </ButtonContainer>
+          </Link>
+        )}
+      </nav>
+    </>
   )
 }
 
-const NavWrapper = styled.nav`
-  background: var(--mainBlue);
-  .nav-link {
-    color: var(--mainWhite) !important;
-    font-size: 1.3rem;
-    text-transform: capitalize;
-  }
-`
+export default Navbar
