@@ -11,7 +11,7 @@ function Navbar() {
   const [click, setClick] = useState(false)
   const [dropdown, setDropdown] = useState(false)
   const { currentUser } = useContext(AuthContext)
-  const handleClick = () => setClick(!click)
+  //const handleClick = () => setClick(!click)
   const closeMobileMenu = () => setClick(false)
 
   const onMouseEnter = () => {
