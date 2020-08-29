@@ -3,7 +3,7 @@
   width: 200px;
   position: absolute;
   top: 80px;
-  z-index: 2;
+  z-index: 3;
   list-style: none;
   text-align: start;
 }
@@ -11,7 +11,7 @@
 .sm-dropdown-menu li {
   background: var(--brandBlue);
   cursor: pointer;
-  z-index: 2;
+  z-index: 3;
 }
 
 .sm-dropdown-menu li:hover {

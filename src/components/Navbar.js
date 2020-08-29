@@ -50,16 +50,18 @@ function Navbar() {
 
         <ul className={click ? "sm-nav-menu active" : "sm-nav-menu"}>
           {currentUser && (
-            <li className="sm-nav-item">
-              <ButtonContainer
-                onMouseEnter={onMouseEnter}
-                onMouseLeave={onMouseLeave}
+            <li
+              className="sm-nav-item"
+              onMouseEnter={onMouseEnter}
+              onMouseLeave={onMouseLeave}
+            >
+              <Link
+                to="/services"
                 className="sm-nav-links"
-                back
                 onClick={closeMobileMenu}
               >
                 Services <i className="fas fa-caret-down" />
-              </ButtonContainer>
+              </Link>
               {dropdown && <Dropdown />}
             </li>
           )}

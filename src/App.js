@@ -5,7 +5,8 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import "./App.css"
 import Home from "./components/pages/Home"
 import { Switch, Route } from "react-router-dom"
-
+import Orders from "./components/pages/Orders"
+import Profile from "./components/pages/Profile"
 import ContactUs from "./components/pages/ContactUs"
 import ProductList from "./components/pages/ProductList"
 import ProductDetails from "./components/pages/ProductDetails"
@@ -27,8 +28,8 @@ function App() {
         <Route path="/sign-up" component={SignUp}></Route>
         <Route path="/login" component={Login}></Route>
         <Route path="/contact-us" component={ContactUs}></Route>
-        <Route path="/profile" component={ContactUs}></Route>
-        <Route path="/orders" component={ContactUs}></Route>
+        <Route path="/profile" component={Profile}></Route>
+        <Route path="/orders" component={Orders}></Route>
         <Route path="/paidCart" component={PaidCart}></Route>
       </Switch>
       <Modal />
