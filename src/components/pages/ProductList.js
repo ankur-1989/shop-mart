@@ -3,11 +3,14 @@ import Product from "./Product"
 import Title from "../Title"
 
 import { storeProducts } from "../../data"
+
 import { DataConsumer } from "../../store"
-export default class ProductList extends Component {
+import { withRouter } from "react-router-dom"
+class ProductList extends Component {
   state = {
     products: storeProducts,
   }
+
   render() {
     return (
       <React.Fragment>
@@ -29,3 +32,5 @@ export default class ProductList extends Component {
     )
   }
 }
+
+export default withRouter(ProductList)

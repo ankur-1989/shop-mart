@@ -9,7 +9,7 @@ export const ButtonContainer = styled.button`
     props.back ? "var(--brandBlue)" : "var(--brandColor)"};
   color: ${(props) => (props.back ? "var(--brandBlue)" : "var(--brandColor)")};
   border-radius: 0.5rem;
-  padding: 0.2rem 0.5rem;
+  padding: 0.2rem;
   cursor: pointer;
   margin: 0.2rem 0.5rem 0.2rem 0;
   transistion: all 0.5s ease-in-out;

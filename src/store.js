@@ -1,9 +1,11 @@
 import React, { Component } from "react"
 import { storeProducts, detailProduct } from "./data"
-
+import { withRouter } from "react-router-dom"
+import { shoes } from "./shoes"
+import { clothes } from "./clothes"
 const DataContext = React.createContext()
 
-export default class DataProvider extends Component {
+class DataProvider extends Component {
   state = {
     products: [],
     detailProduct: detailProduct,
@@ -16,11 +18,27 @@ export default class DataProvider extends Component {
   }
 
   componentDidMount() {
-    this.setProducts()
+    switch (this.props.location.state) {
+      case "mobile":
+        console.log("Mobile inside")
+        this.setProducts(storeProducts)
+        break
+      case "shoes":
+        console.log("Shoes inside")
+        this.setProducts(shoes)
+        break
+      case "clothes":
+        console.log("Clothes inside")
+        this.setProducts(clothes)
+        break
+      default:
+        this.setProducts(storeProducts)
+    }
   }
-  setProducts = () => {
+  setProducts = (data) => {
     let tempProducts = []
-    storeProducts.forEach((prod) => {
+
+    data.forEach((prod) => {
       const singleProd = { ...prod }
       tempProducts = [...tempProducts, singleProd]
     })
@@ -183,6 +201,7 @@ export default class DataProvider extends Component {
           increment: this.increment,
           decrement: this.decrement,
           removeItem: this.removeItem,
+          setProducts: this.setProducts,
           clearCart: this.clearCart,
         }}
       >
@@ -193,5 +212,7 @@ export default class DataProvider extends Component {
 }
 
 const DataConsumer = DataContext.Consumer
+
+export default withRouter(DataProvider)
 
 export { DataContext, DataConsumer }

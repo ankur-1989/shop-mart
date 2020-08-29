@@ -4,7 +4,7 @@ import Modal from "./components/Modal"
 import "bootstrap/dist/css/bootstrap.min.css"
 import "./App.css"
 import Home from "./components/pages/Home"
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
+import { Switch, Route } from "react-router-dom"
 
 import ContactUs from "./components/pages/ContactUs"
 import ProductList from "./components/pages/ProductList"
@@ -17,7 +17,7 @@ import Login from "./components/pages/Login"
 
 function App() {
   return (
-    <Router>
+    <>
       <Navbar />
       <Switch>
         <Route exact path="/" component={Home} />
@@ -32,7 +32,7 @@ function App() {
         <Route path="/paidCart" component={PaidCart}></Route>
       </Switch>
       <Modal />
-    </Router>
+    </>
   )
 }
 
