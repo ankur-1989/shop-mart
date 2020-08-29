@@ -2,9 +2,9 @@ import React, { Component } from "react"
 import styled from "styled-components"
 import { DataConsumer } from "../store"
 import { ButtonContainer } from "./Button"
-import { Link } from "react-router-dom"
+import { Link, withRouter } from "react-router-dom"
 
-export default class Modal extends Component {
+class Modal extends Component {
   render() {
     return (
       <DataConsumer>
@@ -26,7 +26,7 @@ export default class Modal extends Component {
                       <Link
                         to={{
                           pathname: "/products",
-                          state: "mobile",
+                          state: this.props.location.state,
                         }}
                       >
                         <ButtonContainer back onClick={() => closeModal()}>
@@ -49,6 +49,8 @@ export default class Modal extends Component {
     )
   }
 }
+
+export default withRouter(Modal)
 
 const ModalContainer = styled.div`
   position: fixed;

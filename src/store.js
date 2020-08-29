@@ -18,25 +18,33 @@ class DataProvider extends Component {
   }
 
   componentDidMount() {
-    switch (this.props.location.state) {
-      case "mobile":
-        console.log("Mobile inside")
-        this.setProducts(storeProducts)
-        break
-      case "shoes":
-        console.log("Shoes inside")
-        this.setProducts(shoes)
-        break
-      case "clothes":
-        console.log("Clothes inside")
-        this.setProducts(clothes)
-        break
-      default:
-        this.setProducts(storeProducts)
+    this.setProducts(storeProducts)
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.location.state !== this.props.location.state) {
+      console.log(this.props.location.state)
+      this.setProducts()
     }
   }
-  setProducts = (data) => {
+
+  setProducts = () => {
     let tempProducts = []
+    let data = []
+    switch (this.props.location.state) {
+      case "mobile":
+        data = storeProducts
+        break
+      case "shoes":
+        data = shoes
+        break
+      case "clothes":
+        data = clothes
+        break
+      default:
+        data = storeProducts
+        break
+    }
 
     data.forEach((prod) => {
       const singleProd = { ...prod }

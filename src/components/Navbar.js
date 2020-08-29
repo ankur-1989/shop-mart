@@ -24,9 +24,7 @@ function Navbar() {
   const onMouseEnter = () => {
     if (window.innerWidth < 960) {
       setDropdown(false)
-      console.log(currentUser)
     } else {
-      console.log(currentUser)
       setDropdown(true)
     }
   }

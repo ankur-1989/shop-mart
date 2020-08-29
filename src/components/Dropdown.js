@@ -12,7 +12,7 @@ function Dropdown({ onMouseLeave }) {
   const handleLogout = async () => {
     try {
       setClick(false)
-      console.log("calling logout")
+
       await app.auth().signOut()
       history.push("/login")
     } catch (error) {

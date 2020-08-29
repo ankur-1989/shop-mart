@@ -5,7 +5,7 @@ export default class PaypalButton extends React.Component {
   render() {
     const onSuccess = (payment) => {
       // Congratulation, it came here means everything's fine!
-      console.log("The payment was succeeded!", payment)
+
       this.props.clearCart()
       this.props.history.push("/paidCart")
       // You can bind the "payment" object's value to your state or props or whatever here, please see below for sample returned data
@@ -13,7 +13,6 @@ export default class PaypalButton extends React.Component {
 
     const onCancel = (data) => {
       // User pressed "cancel" or close Paypal's popup!
-      console.log("The payment was cancelled!", data)
       // You can bind the "data" object's value to your state or props or whatever here, please see below for sample returned data
     }
 
