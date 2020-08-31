@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react"
+import React, { useState, useContext, useEffect } from "react"
 import { LoginButton } from "./LoginButton"
 import { Link } from "react-router-dom"
 import "./Navbar.css"
@@ -8,6 +8,7 @@ import * as AiIcons from "react-icons/ai"
 import { ButtonContainer } from "./Button"
 import Dropdown from "./Dropdown"
 import { AuthContext } from "../Auth"
+import firebase from "../base"
 
 function Navbar() {
   const [click, setClick] = useState(false)
@@ -16,10 +17,29 @@ function Navbar() {
 
   //const handleClick = () => setClick(!click)
   const closeMobileMenu = () => setClick(false)
-
+  const db = firebase.firestore()
   const [sidebar, setSidebar] = useState(false)
-
+  const [displayName, setDisplayName] = useState()
   const showSidebar = () => setSidebar(!sidebar)
+
+  useEffect(() => {
+    console.log("Page reloaded")
+    const fetchData = async () => {
+      const email = await localStorage.getItem("email")
+      if (email !== null) {
+        console.log(email)
+        db.collection("user")
+          .doc(email)
+          .get()
+          .then((doc) => {
+            const data = doc.data()
+            setDisplayName(data.name)
+            console.log(data) // LA city object with key-value pair
+          })
+      }
+    }
+    fetchData()
+  }, [])
 
   const onMouseEnter = () => {
     if (window.innerWidth < 960) {
@@ -60,7 +80,7 @@ function Navbar() {
                 className="sm-nav-links"
                 onClick={closeMobileMenu}
               >
-                Services <i className="fas fa-caret-down" />
+                Hello {displayName} <i className="fas fa-caret-down" />
               </Link>
               {dropdown && <Dropdown />}
             </li>

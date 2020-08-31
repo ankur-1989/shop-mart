@@ -18,6 +18,7 @@ const Login = ({ history }) => {
       event.preventDefault()
       const { email, password } = event.target.elements
       try {
+        localStorage.setItem("email", email.value)
         await app.auth().signInWithEmailAndPassword(email.value, password.value)
         history.push("/products")
       } catch (error) {

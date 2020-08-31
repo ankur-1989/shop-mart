@@ -1,33 +1,52 @@
 import React, { useState, useCallback } from "react"
 import { withRouter } from "react-router"
-import app from "../../base"
+import firebase from "../../base"
 
 const SignUp = ({ history }) => {
   const [user, setUser] = useState({
     name: "",
     email: "",
     password: "",
+    address: "",
+    contact: "",
     confirmPassword: "",
   })
-
-  const { name, email, password, confirmPassword } = user
+  const db = firebase.firestore()
+  const { name, address, contact, email, password, confirmPassword } = user
 
   const onChange = (e) => setUser({ ...user, [e.target.name]: e.target.value })
 
   const onSubmit = useCallback(
     async (event) => {
       event.preventDefault()
-      const { email, password } = event.target.elements
+      const { name, address, contact, email, password } = event.target.elements
+
       try {
-        await app
+        await firebase
           .auth()
           .createUserWithEmailAndPassword(email.value, password.value)
+          .then((resp) => {
+            db.collection("user")
+              .doc(email.value)
+              .set({
+                name: name.value,
+                address: address.value,
+                contact: contact.value,
+                email: email.value,
+              })
+              .then(function () {
+                console.log("Document successfully written!")
+              })
+              .catch(function (error) {
+                console.error("Error writing document: ", error)
+              })
+          })
         history.push("/")
       } catch (error) {
         alert(error)
       }
     },
-    [history]
+    [history, db]
   )
 
   return (
@@ -37,6 +56,24 @@ const SignUp = ({ history }) => {
         <div className="form-group">
           <label htmlFor="name">Name</label>
           <input type="text" name="name" value={name} onChange={onChange} />
+        </div>
+        <div className="form-group">
+          <label htmlFor="address">Address</label>
+          <input
+            type="text"
+            name="address"
+            value={address}
+            onChange={onChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="contact">Contact Number</label>
+          <input
+            type="text"
+            name="contact"
+            value={contact}
+            onChange={onChange}
+          />
         </div>
         <div className="form-group">
           <label htmlFor="email">Email Address</label>
