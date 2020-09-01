@@ -23,18 +23,15 @@ function Navbar() {
   const showSidebar = () => setSidebar(!sidebar)
 
   useEffect(() => {
-    console.log("Page reloaded")
     const fetchData = async () => {
       const email = await localStorage.getItem("email")
       if (email !== null) {
-        console.log(email)
         db.collection("user")
           .doc(email)
           .get()
           .then((doc) => {
             const data = doc.data()
             setDisplayName(data.name)
-            console.log(data) // LA city object with key-value pair
           })
       }
     }

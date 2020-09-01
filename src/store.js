@@ -23,7 +23,6 @@ class DataProvider extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.location.state !== this.props.location.state) {
-      console.log(this.props.location.state)
       this.setProducts()
     }
   }

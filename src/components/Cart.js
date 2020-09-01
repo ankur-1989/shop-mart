@@ -1,17 +1,17 @@
-import React, { Component } from "react";
-import Title from "./Title";
-import CartColumns from "./CartColumns";
-import EmptyCart from "./EmptyCart";
-import CartList from "./CartList";
-import { DataConsumer } from "../store";
-import CartTotals from "./CartTotals";
+import React, { Component } from "react"
+import Title from "./Title"
+import CartColumns from "./CartColumns"
+import EmptyCart from "./EmptyCart"
+import CartList from "./CartList"
+import { DataConsumer } from "../store"
+import CartTotals from "./CartTotals"
 export default class Cart extends Component {
   render() {
     return (
       <section>
         <DataConsumer>
           {(value) => {
-            const { cart } = value;
+            const { cart } = value
             if (cart.length > 0) {
               return (
                 <React.Fragment>
@@ -20,13 +20,13 @@ export default class Cart extends Component {
                   <CartList value={value} />
                   <CartTotals value={value} history={this.props.history} />
                 </React.Fragment>
-              );
+              )
             } else {
-              return <EmptyCart />;
+              return <EmptyCart title="your cart is currently empty" />
             }
           }}
         </DataConsumer>
       </section>
-    );
+    )
   }
 }

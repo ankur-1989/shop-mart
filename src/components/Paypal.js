@@ -1,13 +1,44 @@
 import React from "react"
 import PaypalExpressBtn from "react-paypal-express-checkout"
+import firebase from "../base"
 
 export default class PaypalButton extends React.Component {
+  state = {
+    lastOrder: [],
+  }
   render() {
-    const onSuccess = (payment) => {
+    const onSuccess = async (payment) => {
       // Congratulation, it came here means everything's fine!
+      const email = await localStorage.getItem("email")
 
-      this.props.clearCart()
-      this.props.history.push("/paidCart")
+      try {
+        const db = firebase.firestore()
+
+        if (email) {
+          this.props.order.map((order) => {
+            db.collection("orders")
+              .doc(email + new Date().getTime().toString())
+              .set({
+                date: new Date().getTime().toString(),
+                email: email,
+                name: order.title,
+                price: order.price,
+                quantity: order.count,
+              })
+              .then(function () {
+                console.log("Document successfully written!")
+              })
+              .catch(function (error) {
+                console.error("Error writing document: ", error)
+              })
+          })
+          this.props.clearCart()
+          this.props.history.push("/paidCart")
+        }
+      } catch (error) {
+        alert(error)
+      }
+
       // You can bind the "payment" object's value to your state or props or whatever here, please see below for sample returned data
     }
 

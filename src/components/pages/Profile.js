@@ -16,7 +16,6 @@ const Profile = ({ history }) => {
     const fetchData = async () => {
       const email = await localStorage.getItem("email")
       if (email !== null) {
-        console.log(email)
         db.collection("user")
           .doc(email)
           .get()
