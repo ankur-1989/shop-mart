@@ -2,7 +2,7 @@ import React from "react"
 import PaypalExpressBtn from "react-paypal-express-checkout"
 import firebase from "../base"
 
-export default function PaypalButton() {
+export default function PaypalButton(props) {
   const onSuccess = async (payment) => {
     // Congratulation, it came here means everything's fine!
     const email = await localStorage.getItem("email")
@@ -11,7 +11,7 @@ export default function PaypalButton() {
       const db = firebase.firestore()
 
       if (email) {
-        this.props.order.map((order) =>
+        props.order.map((order) =>
           db
             .collection("orders")
             .doc(email + new Date().getTime().toString())
@@ -29,8 +29,8 @@ export default function PaypalButton() {
               console.error("Error writing document: ", error)
             })
         )
-        this.props.clearCart()
-        this.props.history.push("/paidCart")
+        props.clearCart()
+        props.history.push("/paidCart")
       }
     } catch (error) {
       alert(error)
@@ -53,7 +53,7 @@ export default function PaypalButton() {
 
   let env = "sandbox" // you can set here to 'production' for production
   let currency = "EUR" // or you can set this value from your props or state
-  let total = this.props.total // same as above, this is the total amount (based on currency) to be paid by using Paypal express checkout
+  let total = props.total // same as above, this is the total amount (based on currency) to be paid by using Paypal express checkout
   // Document on Paypal's currency code: https://developer.paypal.com/docs/classic/api/currency_codes/
 
   const client = {
