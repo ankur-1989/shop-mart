@@ -31,7 +31,7 @@ const Profile = ({ history }) => {
       }
     }
     fetchData()
-  }, [])
+  }, [db])
 
   const onChange = (e) => setUser({ ...user, [e.target.name]: e.target.value })
 
@@ -60,7 +60,7 @@ const Profile = ({ history }) => {
         alert(error)
       }
     },
-    [db, user]
+    [db, user, history]
   )
 
   return (

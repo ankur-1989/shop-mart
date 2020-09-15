@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react"
 import Title from "../Title"
-import CartColumns from "../CartColumns"
 import EmptyCart from "../EmptyCart"
 import OrderItem from "../OrderItem"
 import firebase from "../../base"

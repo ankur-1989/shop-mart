@@ -36,7 +36,7 @@ function Navbar() {
       }
     }
     fetchData()
-  }, [])
+  }, [db])
 
   const onMouseEnter = () => {
     if (window.innerWidth < 960) {
