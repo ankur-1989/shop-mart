@@ -11,8 +11,9 @@ export default function PaypalButton() {
       const db = firebase.firestore()
 
       if (email) {
-        this.props.order.map((order) => {
-          db.collection("orders")
+        this.props.order.map((order) =>
+          db
+            .collection("orders")
             .doc(email + new Date().getTime().toString())
             .set({
               date: new Date().getTime().toString(),
@@ -27,7 +28,7 @@ export default function PaypalButton() {
             .catch(function (error) {
               console.error("Error writing document: ", error)
             })
-        })
+        )
         this.props.clearCart()
         this.props.history.push("/paidCart")
       }
