@@ -1,4 +1,5 @@
 import React from "react"
+import ReactImageZoom from "react-image-zoom"
 
 export default function CartItem({ item, value }) {
   const { id, title, img, price, total, count } = item
@@ -6,11 +7,18 @@ export default function CartItem({ item, value }) {
   return (
     <div className="row my-1 text-capitalize text-center">
       <div className="col-10 mx-auto col-lg-2">
-        <img
+        {/*    <img
           src={img}
           alt="item"
           style={{ width: "5rem", height: "5rem" }}
           className="img-fluid"
+        /> */}
+        <ReactImageZoom
+          width={50}
+          img={img}
+          height={50}
+          scale={1.8}
+          zoomPosition={"right"}
         />
       </div>
       <div className="col-10 mx-auto col-lg-2">
