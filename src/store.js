@@ -22,7 +22,10 @@ class DataProvider extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.location.state !== this.props.location.state) {
+    if (
+      prevProps.location.state !== this.props.location.state &&
+      this.props.location.state
+    ) {
       this.setProducts()
     }
   }
@@ -42,15 +45,14 @@ class DataProvider extends Component {
         break
       default:
         data = storeProducts
-        break
     }
 
     data.forEach((prod) => {
       const singleProd = { ...prod }
       tempProducts = [...tempProducts, singleProd]
     })
-    this.setState(() => {
-      return { products: tempProducts }
+    this.setState((prevState) => {
+      return { ...prevState, products: tempProducts }
     })
   }
 
@@ -61,12 +63,14 @@ class DataProvider extends Component {
 
   handleDetail = (id) => {
     const product = this.getItem(id)
-    this.setState(() => {
-      return { detailProduct: product }
+
+    this.setState((prevState) => {
+      return { ...prevState, detailProduct: product, modalProduct: product }
     })
   }
   addToCart = (id) => {
     const tempProducts = [...this.state.products]
+
     const index = tempProducts.indexOf(this.getItem(id))
     const product = tempProducts[index]
     product.inCart = true
@@ -74,8 +78,9 @@ class DataProvider extends Component {
     const price = product.price
     product.total = price
     this.setState(
-      () => {
+      (prevState) => {
         return {
+          ...prevState,
           products: tempProducts,
           cart: [...this.state.cart, product],
         }
@@ -88,14 +93,15 @@ class DataProvider extends Component {
 
   openModal = (id) => {
     const product = this.getItem(id)
-    this.setState(() => {
-      return { modalProduct: product, modalOpen: true }
+
+    this.setState((prevState) => {
+      return { ...prevState, modalProduct: product, modalOpen: true }
     })
   }
 
   closeModal = () => {
-    this.setState(() => {
-      return { modalOpen: false }
+    this.setState((prevState) => {
+      return { ...prevState, modalOpen: false }
     })
   }
 
@@ -109,8 +115,9 @@ class DataProvider extends Component {
     product.total = product.count * product.price
 
     this.setState(
-      () => {
+      (prevState) => {
         return {
+          ...prevState,
           cart: [...tempCart],
         }
       },
@@ -133,8 +140,9 @@ class DataProvider extends Component {
     } else {
       product.total = product.count * product.price
       this.setState(
-        () => {
+        (prevState) => {
           return {
+            ...prevState,
             cart: [...tempCart],
           }
         },
@@ -155,8 +163,9 @@ class DataProvider extends Component {
     removedProduct.count = 0
     removedProduct.total = 0
     this.setState(
-      () => {
+      (prevState) => {
         return {
+          ...prevState,
           cart: [...tempCart],
           products: [...tempProducts],
         }
@@ -169,8 +178,9 @@ class DataProvider extends Component {
 
   clearCart = () => {
     this.setState(
-      () => {
+      (prevState) => {
         return {
+          ...prevState,
           cart: [],
         }
       },
@@ -187,8 +197,9 @@ class DataProvider extends Component {
     const tempTax = subTotal * 0.18
     const tax = parseFloat(tempTax.toFixed(2))
     const total = parseFloat((subTotal + tax).toFixed(2))
-    this.setState(() => {
+    this.setState((prevState) => {
       return {
+        ...prevState,
         cartSubTotal: subTotal,
         cartTax: tax,
         cartTotal: total,
