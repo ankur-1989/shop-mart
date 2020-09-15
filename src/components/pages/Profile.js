@@ -60,7 +60,7 @@ const Profile = ({ history }) => {
         alert(error)
       }
     },
-    [db, user, history]
+    [db, history]
   )
 
   return (
